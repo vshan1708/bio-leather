@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shop | Pineapple Bio-Leather</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Specific styling for product descriptions */
+        .product-info {
+            text-align: left;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+        .product-desc {
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        .spec-list {
+            background-color: #f9fdf9;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #e0eee0;
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 20px;
+        }
+        .spec-list li {
+            margin-bottom: 5px;
+            color: var(--text);
+        }
+        .spec-list li strong {
+            color: var(--primary-green);
+        }
+    </style>
+</head>
+<body>
+    <!-- FLOATING CART -->
+    <div class="floating-cart" onclick="openCart()">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <div id="cart-badge">0</div>
+    </div>
+
+    <!-- SIDE CART DRAWER -->
+    <div class="cart-overlay" id="overlay" onclick="closeCart()"></div>
+    <div class="side-cart" id="sideCart">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h3>My Basket</h3>
+            <span onclick="closeCart()" style="cursor:pointer; font-size:2rem; color:var(--primary-green);">&times;</span>
+        </div>
+        <div id="cartItems" style="flex-grow:1; overflow-y:auto; margin:20px 0;"></div>
+        <div style="font-weight:700;">Total: <span id="totalPrice">RM 0.00</span></div>
+        <button class="buy-btn" style="width:100%; margin-top:15px;" onclick="checkout()">Checkout Now</button>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <a href="home.html"><img src="pineapple2.png" class="nav-logo-img"></a>
+        <a href="how-its-made.html">Process</a>
+        <a href="properties.html">Properties & Apps</a>
+        <a href="research.html">Research</a>
+        <a href="shop.html" class="active">Shop</a>
+        <a href="support.html">Support</a>
+    </nav>
+
+    <header>
+        <h1>Purchase Bio-Leather</h1>
+        <p>Sustainable materials for your next project</p>
+    </header>
+
+    <div class="container">
+        <div class="product-grid">
+            
+            <!-- Product 1: 0.8mm -->
+            <div class="product-card">
+                <div class="slider-container">
+                    <div class="slider-wrapper" id="slider1">
+                        <img src="p1_1.jpeg"><img src="p1_2.jpeg"><img src="p1_3.jpeg"><img src="p1_4.jpeg"><img src="p1_5.jpeg">
+                    </div>
+                    <div class="slider-nav">
+                        <button onclick="moveSlide(1, -1)">&#10094;</button>
+                        <button onclick="moveSlide(1, 1)">&#10095;</button>
+                    </div>
+                </div>
+                <h3>🍍 Bio-Leather 0.8 mm</h3>
+                <p style="font-weight:700; color:var(--primary-green); font-size: 1.2rem;">RM 34.00</p>
+                
+                <div class="product-info">
+                    <p class="product-desc">A thin and flexible bio-leather sheet designed for applications that require easy bending and lightweight handling. Its smooth surface texture and 0.8 mm thickness make it suitable for products such as wallets, small pouches, notebook covers and other flexible accessories.</p>
+                    <ul class="spec-list">
+                        <li><strong>Thickness:</strong> 0.8 mm</li>
+                        <li><strong>Flexibility:</strong> High</li>
+                        <li><strong>Surface:</strong> Smooth, natural texture</li>
+                        <li><strong>Best suited for:</strong> Flexible and lightweight products</li>
+                    </ul>
+                </div>
+
+                <button class="buy-btn" onclick="addToCart('Bio-Leather 0.8mm', 34.00)">Add to Cart</button>
+            </div>
+
+            <!-- Product 2: 2.0mm -->
+            <div class="product-card">
+                <div class="slider-container">
+                    <div class="slider-wrapper" id="slider2">
+                        <img src="p2_1.jpeg"><img src="p2_2.jpeg"><img src="p2_3.jpeg"><img src="p2_4.jpeg"><img src="p2_5.jpeg">
+                    </div>
+                    <div class="slider-nav">
+                        <button onclick="moveSlide(2, -1)">&#10094;</button>
+                        <button onclick="moveSlide(2, 1)">&#10095;</button>
+                    </div>
+                </div>
+                <h3>🍍 Bio-Leather 2.0 mm</h3>
+                <p style="font-weight:700; color:var(--primary-green); font-size: 1.2rem;">RM 48.00</p>
+                
+                <div class="product-info">
+                    <p class="product-desc">A thicker and more rigid bio-leather sheet designed for applications requiring greater structure and durability. With its 2.0 mm thickness, it provides better stiffness and is suitable for structured bags, protective covers, cases and other products that require more support.</p>
+                    <ul class="spec-list">
+                        <li><strong>Thickness:</strong> 2.0 mm</li>
+                        <li><strong>Flexibility:</strong> Low / More rigid</li>
+                        <li><strong>Surface:</strong> Smooth, natural texture</li>
+                        <li><strong>Best suited for:</strong> Structured and durable products</li>
+                    </ul>
+                </div>
+
+                <button class="buy-btn" onclick="addToCart('Bio-Leather 2.0mm', 48.00)">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p><strong>Politeknik Malaysia Final Year Project</strong></p>
+        <p>Prepared by: Sharinni Saha Thevan | Politeknik Malaysia</p>
+    </footer>
+
+    <script>
+        let slideIndices = { 1: 0, 2: 0 };
+        function moveSlide(sliderId, step) {
+            const totalSlides = 5;
+            slideIndices[sliderId] = (slideIndices[sliderId] + step + totalSlides) % totalSlides;
+            const wrapper = document.getElementById('slider' + sliderId);
+            wrapper.style.transform = `translateX(-${slideIndices[sliderId] * 100}%)`;
+        }
+
+        let cart = [];
+        function addToCart(n, p) { 
+            cart.push({n, p}); 
+            updateUI(); 
+            const t = document.getElementById('toast');
+            if(t) { t.style.display='block'; setTimeout(()=>t.style.display='none', 2000); }
+            else { alert(n + " added to basket!"); }
+        }
+
+        function updateUI() { 
+            document.getElementById('cart-badge').innerText = cart.length;
+            const items = document.getElementById('cartItems');
+            items.innerHTML = cart.map(i => `<div style="display:flex; justify-content:space-between; padding:5px 0; border-bottom:1px solid #eee;"><span>${i.n}</span><span>RM ${i.p.toFixed(2)}</span></div>`).join('');
+            document.getElementById('totalPrice').innerText = "RM " + cart.reduce((s, i) => s + i.p, 0).toFixed(2);
+        }
+
+        function openCart() { 
+            document.getElementById('sideCart').classList.add('open'); 
+            document.getElementById('overlay').style.display = 'block'; 
+            document.body.style.overflow = 'hidden';
+        }
+        function closeCart() { 
+            document.getElementById('sideCart').classList.remove('open'); 
+            document.getElementById('overlay').style.display = 'none'; 
+            document.body.style.overflow = 'auto';
+        }
+        function checkout() { 
+            if(cart.length === 0) return alert("Basket is empty!");
+            alert("Checkout Successful! Thank you."); 
+            cart = []; updateUI(); closeCart(); 
+        }
+    </script>
+    <script src="https://www.chatbase.co/embed.min.js" chatbotId="7awoZsvfanQiO3bXjcjR2" domain="www.chatbase.co" defer></script>
+</body>
+</html>

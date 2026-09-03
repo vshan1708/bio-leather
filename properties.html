@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Properties & Apps | Pineapple Bio-Leather</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Specific styling for Properties Content */
+        .property-card {
+            background-color: #fcfdfc;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            border-left: 6px solid var(--accent-green);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+
+        .property-card h3 {
+            color: var(--primary-green);
+            margin-top: 0;
+            text-transform: uppercase;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+
+        /* Styling for the Emoji List */
+        .app-list-container {
+            background-color: #f0f7f0;
+            padding: 30px;
+            border-radius: 20px;
+            margin: 30px 0;
+        }
+
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            list-style: none;
+            padding: 0;
+        }
+
+        .app-grid li {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .app-grid li span {
+            margin-right: 12px;
+            font-size: 1.4rem;
+        }
+
+        /* THE IMAGE TEMPLATE (Matches Research Page) */
+        .visual-template {
+            text-align: center;
+            margin: 50px 0;
+            padding: 40px 20px;
+            background-color: #ffffff;
+            border-radius: 25px;
+            border: 2px dashed #dce8dc;
+        }
+
+        .gallery-frame {
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            display: inline-block;
+            max-width: 100%;
+        }
+
+        .gallery-frame img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            display: block;
+        }
+
+        .gallery-caption {
+            margin-top: 20px;
+            font-style: italic;
+            font-size: 0.9rem;
+            color: #666;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <a href="home.html"><img src="pineapple2.png" class="nav-logo-img" alt="Home"></a>
+        <a href="how-its-made.html">Process</a>
+        <a href="properties.html" class="active">Properties & Apps</a>
+        <a href="research.html">Research</a>
+        <a href="shop.html">Shop</a>
+        <a href="support.html">Support</a>
+    </nav>
+
+    <!-- Header Section -->
+    <header>
+        <h1>Properties & Applications</h1>
+        <p>Characteristics and Potential of PALF-based Materials</p>
+    </header>
+
+    <div class="container">
+        
+        <!-- Section 1: Material Properties -->
+        <div class="property-card">
+            <h3>Fiber Characteristics & Treatment</h3>
+            <p>Pineapple Leaf Fiber (PALF) possesses several desirable properties that make it a promising natural fiber for the development of sustainable leather-alternative materials. PALF contains a high percentage of cellulose, which contributes to its good tensile strength, stiffness, durability and structural integrity. It is also lightweight, renewable and obtained from pineapple leaves that are commonly considered agricultural waste, making it a valuable material for waste utilization and sustainable product development.</p>
+            
+            <p>In addition, the natural fibrous structure of PALF provides a unique surface texture that can produce a leather-like appearance when the material is properly processed, compressed and surface-treated. Chemical treatment, particularly alkaline treatment using sodium hydroxide (NaOH), can remove a portion of lignin, hemicellulose and surface impurities from the fibers, improving surface roughness and enhancing bonding between the fiber and polymer matrix.</p>
+        </div>
+
+        <div class="property-card">
+            <h3>Material Versatility</h3>
+            <p>The properties of the final material can also be adjusted by controlling factors such as fiber content, binder composition, processing conditions and sheet thickness. A thinner sheet can provide greater flexibility and ease of folding, while a thicker sheet can provide greater rigidity and dimensional stability. Due to these properties, PALF-based materials have potential applications in non-structural products such as wallets, phone cases, notebook covers, small bags, belts, footwear components, packaging materials and decorative interior panels. Therefore, the development of PALF-based leather alternatives can provide functional applications while simultaneously reducing agricultural waste and dependence on conventional petroleum-based synthetic leather.</p>
+        </div>
+
+        <!-- Section 2: Application List -->
+        <div class="app-list-container">
+            <h2 style="margin-top:0; border:none; text-align:center;">Recommended Applications</h2>
+            <ul class="app-grid">
+                <li><span>👛</span> Wallets</li>
+                <li><span>📱</span> Phone covers</li>
+                <li><span>👜</span> Small bags</li>
+                <li><span>📓</span> Notebook covers</li>
+                <li><span>👞</span> Footwear components</li>
+                <li><span>🎒</span> Accessories</li>
+                <li><span>🪑</span> Interior panels</li>
+                <li><span>📦</span> Sustainable packaging</li>
+            </ul>
+        </div>
+
+        <!-- Section 3: Visual Gallery Template -->
+        <div class="visual-template">
+            <div class="gallery-frame">
+                <!-- Replace 'palf-apps.jpg' with your actual image file name -->
+                <img src="palf-apps.jpeg" alt="Applications of PALF Leather">
+                <div class="gallery-caption">Visual Overview: Commercial Applications of Pineapple Leaf Fiber Leather</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>Politeknik Malaysia Final Year Project</strong></p>
+        <p>Prepared by: Quantum Ventures | Supervisor: Nor Syuhada Binti Muslim</p>
+    </footer>
+
+    <!-- AI Chatbot Script -->
+    <script src="https://www.chatbase.co/embed.min.js" chatbotId="7awoZsvfanQiO3bXjcjR2" domain="www.chatbase.co" defer></script>
+
+</body>
+</html>
