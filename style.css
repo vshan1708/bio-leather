@@ -1,5 +1,7 @@
+/* 1. IMPORT PROFESSIONAL FONT */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
+/* 2. THEME VARIABLES */
 :root {
     --primary-green: #2e5a27;
     --accent-green: #8bc34a;
@@ -8,15 +10,17 @@
     --text: #2c3e50;
 }
 
+/* 3. GLOBAL STYLES */
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0; padding: 0;
     background-color: var(--light-bg);
     color: var(--text);
     line-height: 1.8;
+    overflow-x: hidden; /* Prevents unwanted horizontal scrolling on mobile */
 }
 
-/* NAVIGATION */
+/* 4. NAVIGATION BAR */
 nav {
     background-color: var(--primary-green);
     padding: 10px 0;
@@ -56,7 +60,7 @@ nav a:hover { transform: scale(1.1); color: white; }
     object-fit: contain;
 }
 
-/* HEADER */
+/* 5. HEADER & HERO SECTION */
 header {
     background: linear-gradient(135deg, #2e5a27 0%, #1e3d1a 100%);
     color: white;
@@ -75,7 +79,7 @@ header {
     box-shadow: 0 15px 35px rgba(0,0,0,0.3);
 }
 
-header h1 { font-size: 2.4rem; font-weight: 700; margin: 0; width: 100%; text-align: center; }
+header h1 { font-size: 2.4rem; font-weight: 700; margin: 0; text-align: center; width: 100%; }
 
 header p {
     font-size: 1.1rem;
@@ -86,9 +90,9 @@ header p {
     margin: 10px auto 0 auto !important;
 }
 
-/* CONTAINER */
+/* 6. CONTENT CONTAINER */
 .container {
-    max-width: 1100px;
+    max-width: 1000px;
     margin: 40px auto;
     padding: 40px;
     background: var(--white);
@@ -96,94 +100,82 @@ header p {
     box-shadow: 0 10px 40px rgba(0,0,0,0.05);
 }
 
-/* --- FIXED SLIDER CSS --- */
-.slider-container {
-    position: relative;
-    width: 100%;
-    height: 350px; /* Increased height to fit your images better */
-    overflow: hidden;
-    border-radius: 15px;
-    margin-bottom: 20px;
-    background: #f0f0f0;
+h2 {
+    color: var(--primary-green);
+    font-weight: 700;
+    border-left: 6px solid var(--accent-green);
+    padding-left: 20px;
+    text-transform: uppercase;
 }
 
-.slider-wrapper {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
+p { text-align: justify; margin-bottom: 25px; }
 
-.slider-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* ensures whole image is visible */
-    flex-shrink: 0;
-}
-
-.slider-nav {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    transform: translateY(-50%);
-    padding: 0 10px;
-    box-sizing: border-box;
-    z-index: 10;
-    pointer-events: none;
-}
-
-.slider-nav button {
-    background: var(--primary-green);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    pointer-events: auto;
-    font-size: 1.2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: 0.3s;
-}
-
-.slider-nav button:hover { background: var(--accent-green); transform: scale(1.1); }
-
-/* SHOP GRID */
-.product-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-}
-
-.product-card {
-    border: 1px solid #eee;
-    padding: 25px;
-    border-radius: 25px;
-    text-align: center;
-    background: white;
-}
-
-.buy-btn {
+/* 7. SHOP BUTTONS (PILL STYLE) */
+.buy-btn, .submit-btn {
     background-color: var(--primary-green);
     color: white;
     border: none;
     padding: 14px 45px;
     border-radius: 50px;
+    font-family: 'Poppins', sans-serif;
     font-weight: 600;
     text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 0.85rem;
     cursor: pointer;
-    transition: 0.3s;
-    margin-top: 15px;
+    transition: all 0.3s ease;
 }
 
-.buy-btn:hover { background-color: var(--accent-green); color: var(--primary-green); }
+.buy-btn:hover, .submit-btn:hover {
+    background-color: var(--accent-green);
+    color: var(--primary-green);
+    transform: translateY(-3px);
+}
 
-/* FOOTER */
+/* 8. FLOATING CART BUTTON (POSITIONED ABOVE CHATBOT) */
+.floating-cart {
+    position: fixed; 
+    bottom: 110px; 
+    right: 30px; 
+    width: 65px; height: 65px;
+    background: var(--primary-green); 
+    color: white; 
+    border-radius: 50%;
+    display: flex; justify-content: center; align-items: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3); 
+    cursor: pointer; 
+    z-index: 2000;
+    border: 3px solid var(--accent-green); 
+    transition: 0.3s;
+}
+
+#cart-badge { 
+    position: absolute; top: 0; right: 0; 
+    background: #e74c3c; color: white; 
+    width: 22px; height: 22px; border-radius: 50%; 
+    display: flex; justify-content: center; align-items: center; 
+    font-size: 0.75rem; border: 2px solid white; font-weight: bold; 
+}
+
+/* 9. SIDE CART DRAWER */
+.side-cart {
+    position: fixed; top: 0; right: -420px; width: 400px; height: 100%;
+    background: white; z-index: 4000; transition: right 0.4s ease; padding: 30px;
+    display: flex; flex-direction: column; box-sizing: border-box; box-shadow: -10px 0 30px rgba(0,0,0,0.2);
+}
+.side-cart.open { right: 0; }
+.cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; z-index: 3500; }
+
+/* 10. PRODUCT GRID & SLIDER */
+.product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+.product-card { border: 1px solid #eee; padding: 25px; border-radius: 20px; text-align: center; background: white; }
+.slider-container { position: relative; width: 100%; height: 300px; overflow: hidden; border-radius: 15px; margin-bottom: 20px; background: #eee;}
+.slider-wrapper { display: flex; width: 100%; height: 100%; transition: transform 0.5s ease; }
+.slider-wrapper img { width: 100%; height: 100%; object-fit: contain; flex-shrink: 0; }
+.slider-nav { position: absolute; top: 50%; width: 100%; display: flex; justify-content: space-between; transform: translateY(-50%); padding: 0 10px; box-sizing: border-box; pointer-events: none; }
+.slider-nav button { background: var(--primary-green); color: white; border: none; border-radius: 50%; width: 35px; height: 35px; cursor: pointer; pointer-events: auto; }
+
+/* 11. FOOTER (Standardized) */
 footer {
     background-color: var(--primary-green) !important;
     color: white !important;
@@ -191,75 +183,69 @@ footer {
     padding: 60px 20px;
     margin-top: 80px;
     width: 100%;
-    box-sizing: border-box;
     display: block;
+    box-sizing: border-box;
 }
 
 footer p { text-align: center !important; margin: 5px 0; opacity: 0.9; }
 
-/* FLOATING CART (Above AI Bot) */
-.floating-cart { position: fixed; bottom: 110px; right: 30px; width: 65px; height: 65px; background: var(--primary-green); color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; z-index: 2000; border: 3px solid var(--accent-green); cursor: pointer; }
-.side-cart { position: fixed; top: 0; right: -420px; width: 400px; height: 100%; background: white; z-index: 4000; transition: right 0.4s ease; padding: 30px; display: flex; flex-direction: column; box-sizing: border-box; box-shadow: -10px 0 30px rgba(0,0,0,0.2); }
-.side-cart.open { right: 0; }
-.cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; z-index: 2500; }
-
-/* --- ONLY CONTACT US SECTION DESIGN --- */
-.contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    max-width: 100%;
-    margin-top: 20px;
+/* 12. CONTACT FORM */
+.contact-form { display: flex; flex-direction: column; gap: 20px; max-width: 700px; margin: 30px auto; }
+.form-row { display: flex; gap: 20px; }
+.form-row input { flex: 1; }
+.contact-form input, .contact-form textarea {
+    padding: 15px; border: 2px solid #e0eee0; border-radius: 12px;
+    font-family: 'Poppins'; font-size: 0.95rem; background-color: #fcfdfc; width: 100%; box-sizing: border-box;
 }
+.contact-form textarea { height: 150px; resize: none; }
 
-.form-row {
-    display: flex;
-    gap: 15px;
-}
+/* 📱 MOBILE RESPONSIVE RULES 📱 */
+@media (max-width: 768px) {
+    /* NAVIGATION: Stack or allow wrapping */
+    nav {
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 15px 5px;
+    }
+    
+    nav a { font-size: 0.7rem; }
+    
+    .nav-logo-img { height: 45px; width: 45px; }
 
-.form-row input {
-    flex: 1;
-}
+    /* HEADER: Shrink text sizes */
+    header h1 { font-size: 1.8rem; }
+    header p { font-size: 0.9rem; }
+    .hero-main-img { max-width: 90%; }
 
-.contact-form input, 
-.contact-form textarea {
-    padding: 12px 15px;
-    border: 2px solid #e0eee0; /* Light green border */
-    border-radius: 10px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.9rem;
-    background-color: #fcfdfc;
-    transition: all 0.3s ease;
-    outline: none;
-}
+    /* CONTAINER: Reduce side padding */
+    .container {
+        margin: 20px auto;
+        padding: 20px;
+        width: 95%;
+        box-sizing: border-box;
+    }
 
-.contact-form input:focus, 
-.contact-form textarea:focus {
-    border-color: var(--accent-green);
-    background-color: #ffffff;
-    box-shadow: 0 0 8px rgba(139, 195, 74, 0.2);
-}
+    /* SHOP GRID: Change from 2 columns to 1 column */
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
 
-.contact-form textarea {
-    height: 120px;
-    resize: none;
-}
+    /* SIDE CART: Fill full width on phone */
+    .side-cart {
+        width: 100%;
+        right: -100%;
+    }
 
-.submit-btn {
-    background-color: var(--primary-green);
-    color: white;
-    border: none;
-    padding: 12px 35px;
-    border-radius: 50px;
-    font-weight: 600;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: 0.3s;
-    align-self: flex-start; /* Keeps button on the left or use 'center' */
-}
+    /* CONTACT FORM: Stack inputs on mobile */
+    .form-row {
+        flex-direction: column;
+        gap: 15px;
+    }
 
-.submit-btn:hover {
-    background-color: var(--accent-green);
-    color: var(--primary-green);
-    transform: translateY(-2px);
+    /* FLOATING BUTTON: Shrink size slightly */
+    .floating-cart {
+        width: 55px; height: 55px;
+        bottom: 110px;
+        right: 20px;
+    }
 }
