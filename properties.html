@@ -93,7 +93,7 @@
     </style>
 </head>
 <body>
-
+<div id="scroll-progress"></div>
     <!-- Navigation Bar -->
     <nav>
         <a href="home.html"><img src="pineapple2.png" class="nav-logo-img" alt="Home"></a>
@@ -153,12 +153,19 @@
 
     <!-- Footer -->
     <footer>
-        <p><strong>Politeknik Malaysia Final Year Project</strong></p>
-        <p>Prepared by: Quantum Ventures | Supervisor: Nor Syuhada Binti Muslim</p>
+        <p><strong>Politeknik Tun Syed Nasir Syed Ismail</strong></p>
+        <p>Prepared by: Sharinni, Ragen, Sarveswary & Shera | Supervisor: Nor Syuhada Binti Muslim</p>
     </footer>
 
     <!-- AI Chatbot Script -->
     <script src="https://www.chatbase.co/embed.min.js" chatbotId="7awoZsvfanQiO3bXjcjR2" domain="www.chatbase.co" defer></script>
-
+<script>
+    window.addEventListener('scroll', () => {
+        let scrollDistance = document.documentElement.scrollTop;
+        let totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        let progress = (scrollDistance / totalHeight) * 100;
+        document.getElementById('scroll-progress').style.width = progress + '%';
+    });
+</script>
 </body>
 </html>
