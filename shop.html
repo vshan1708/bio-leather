@@ -37,27 +37,38 @@
     </style>
 </head>
 <body>
+    <div id="scroll-progress"></div>
+
     <!-- FLOATING CART -->
-    <div class="floating-cart" onclick="openCart()">
+    <div class="floating-cart" id="floatingCart" onclick="openCart()" role="button" aria-label="Open shopping cart" tabindex="0">
         <i class="fa-solid fa-cart-shopping"></i>
         <div id="cart-badge">0</div>
     </div>
 
     <!-- SIDE CART DRAWER -->
-    <div class="cart-overlay" id="overlay" onclick="closeCart()"></div>
-    <div class="side-cart" id="sideCart">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-            <h3>My Basket</h3>
-            <span onclick="closeCart()" style="cursor:pointer; font-size:2rem; color:var(--primary-green);">&times;</span>
-        </div>
-        <div id="cartItems" style="flex-grow:1; overflow-y:auto; margin:20px 0;"></div>
-        <div style="font-weight:700;">Total: <span id="totalPrice">RM 0.00</span></div>
-        <button class="buy-btn" style="width:100%; margin-top:15px;" onclick="checkout()">Checkout Now</button>
+<div class="cart-overlay" id="overlay" onclick="closeCart()"></div>
+<aside class="side-cart" id="sideCart" aria-hidden="true">
+    <div class="cart-header">
+        <h3>My Basket</h3>
+        <span onclick="closeCart()">&times;</span>
     </div>
+    
+    <div id="cartItems">
+        <!-- Items inject here -->
+    </div>
+    
+    <div class="cart-footer">
+        <div style="font-weight:700; font-size:1.1rem; margin-bottom:15px; display:flex; justify-content:space-between;">
+            <span>Total:</span>
+            <span id="totalPrice" style="color:var(--primary-green);">RM 0.00</span>
+        </div>
+        <button class="buy-btn" style="width:100%;" onclick="checkout()">Checkout Now</button>
+    </div>
+</aside>
 
     <!-- NAVIGATION -->
     <nav>
-        <a href="home.html"><img src="pineapple2.png" class="nav-logo-img"></a>
+        <a href="home.html"><img src="pineapple2.png" class="nav-logo-img" alt="Home"></a>
         <a href="how-its-made.html">Process</a>
         <a href="properties.html">Properties & Apps</a>
         <a href="research.html">Research</a>
@@ -97,7 +108,7 @@
                     </ul>
                 </div>
 
-                <button class="buy-btn" onclick="addToCart('Bio-Leather 0.8mm', 34.00)">Add to Cart</button>
+                <button class="buy-btn" onclick="addToCart(event, 'Bio-Leather 0.8mm', 34.00)">Add to Cart</button>
             </div>
 
             <!-- Product 2: 2.0mm -->
@@ -124,14 +135,14 @@
                     </ul>
                 </div>
 
-                <button class="buy-btn" onclick="addToCart('Bio-Leather 2.0mm', 48.00)">Add to Cart</button>
+                <button class="buy-btn" onclick="addToCart(event, 'Bio-Leather 2.0mm', 48.00)">Add to Cart</button>
             </div>
         </div>
     </div>
 
     <footer>
-        <p><strong>Politeknik Malaysia Final Year Project</strong></p>
-        <p>Prepared by: Sharinni Saha Thevan | Politeknik Malaysia</p>
+        <p><strong>Politeknik Tun Syed Nasir Syed Ismail</strong></p>
+        <p>Prepared by: Sharinni, Ragen, Sarveswary & Shera | Politeknik Malaysia</p>
     </footer>
 
     <script>
@@ -144,37 +155,123 @@
         }
 
         let cart = [];
-        function addToCart(n, p) { 
-            cart.push({n, p}); 
-            updateUI(); 
-            const t = document.getElementById('toast');
-            if(t) { t.style.display='block'; setTimeout(()=>t.style.display='none', 2000); }
-            else { alert(n + " added to basket!"); }
+        function addToCart(e, n, p) {
+            // IMPORTANT: Add to Cart must NOT open or activate the cart overlay.
+            if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+
+            cart.push({n, p});
+            updateUI();
+
+            // Create the Eco-Burst effect only.
+            createEcoBurst(e);
+        }
+
+        // Function for the emoji burst
+        function createEcoBurst(e) {
+            if (!e) return;
+            const emojis = ['🍍', '🍃', '✨'];
+            for(let i = 0; i < 6; i++) {
+                let drop = document.createElement('div');
+                drop.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                drop.style.position = 'fixed';
+                drop.style.left = e.clientX + 'px';
+                drop.style.top = e.clientY + 'px';
+                drop.style.fontSize = '1.5rem';
+                drop.style.pointerEvents = 'none';
+                drop.style.zIndex = '9999';
+                drop.style.transition = 'all 0.8s cubic-bezier(0.25, 1, 0.5, 1)';
+                document.body.appendChild(drop);
+
+                setTimeout(() => {
+                    let randomX = (Math.random() - 0.5) * 150;
+                    let randomY = (Math.random() * -100) - 50;
+                    drop.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${Math.random() * 360}deg)`;
+                    drop.style.opacity = '0';
+                }, 10);
+
+                setTimeout(() => drop.remove(), 800);
+            }
         }
 
         function updateUI() { 
-            document.getElementById('cart-badge').innerText = cart.length;
-            const items = document.getElementById('cartItems');
-            items.innerHTML = cart.map(i => `<div style="display:flex; justify-content:space-between; padding:5px 0; border-bottom:1px solid #eee;"><span>${i.n}</span><span>RM ${i.p.toFixed(2)}</span></div>`).join('');
-            document.getElementById('totalPrice').innerText = "RM " + cart.reduce((s, i) => s + i.p, 0).toFixed(2);
-        }
+    document.getElementById('cart-badge').innerText = cart.length;
+    const items = document.getElementById('cartItems');
+    
+    if (cart.length === 0) {
+        items.innerHTML = "<p style='text-align:center; color:#888; margin-top:20px;'>Your basket is empty.</p>";
+    } else {
+        items.innerHTML = cart.map(i => `<div class="cart-item-row"><span>${i.n}</span><span style="color:var(--primary-green);">RM ${i.p.toFixed(2)}</span></div>`).join('');
+    }
+    
+    document.getElementById('totalPrice').innerText = "RM " + cart.reduce((s, i) => s + i.p, 0).toFixed(2);
+}
 
-        function openCart() { 
-            document.getElementById('sideCart').classList.add('open'); 
-            document.getElementById('overlay').style.display = 'block'; 
+        function openCart() {
+            const sideCart = document.getElementById('sideCart');
+            const overlay = document.getElementById('overlay');
+
+            sideCart.classList.add('open');
+            overlay.classList.add('active');
+            document.body.classList.add('cart-is-open');
             document.body.style.overflow = 'hidden';
         }
-        function closeCart() { 
-            document.getElementById('sideCart').classList.remove('open'); 
-            document.getElementById('overlay').style.display = 'none'; 
-            document.body.style.overflow = 'auto';
+        
+        function closeCart() {
+            const sideCart = document.getElementById('sideCart');
+            const overlay = document.getElementById('overlay');
+
+            sideCart.classList.remove('open');
+            overlay.classList.remove('active');
+            document.body.classList.remove('cart-is-open');
+            document.body.style.overflow = '';
         }
         function checkout() { 
             if(cart.length === 0) return alert("Basket is empty!");
             alert("Checkout Successful! Thank you."); 
             cart = []; updateUI(); closeCart(); 
         }
+
+        document.getElementById('floatingCart').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openCart();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeCart();
+        });
+
+        document.addEventListener('DOMContentLoaded', updateUI);
     </script>
     <script src="https://www.chatbase.co/embed.min.js" chatbotId="7awoZsvfanQiO3bXjcjR2" domain="www.chatbase.co" defer></script>
+    <script>
+    window.addEventListener('scroll', () => {
+        let scrollDistance = document.documentElement.scrollTop;
+        let totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        let progress = (scrollDistance / totalHeight) * 100;
+        document.getElementById('scroll-progress').style.width = progress + '%';
+    });
+    </script>
+    <script>
+    document.querySelectorAll('.buy-btn, .submit-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            let x = e.clientX - e.target.getBoundingClientRect().left;
+            let y = e.clientY - e.target.getBoundingClientRect().top;
+            
+            let ripple = document.createElement('span');
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.classList.add('ripple');
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => { ripple.remove() }, 600);
+        });
+    });
+    </script>
 </body>
 </html>
